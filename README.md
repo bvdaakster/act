@@ -1,5 +1,5 @@
 # Android CLI Tools
-[![PyPI version](https://badge.fury.io/py/androidact.svg)](https://badge.fury.io/py/androidact)
+[![PyPI version](https://badge.fury.io/py/androidact.svg)](https://badge.fury.io/py/androidact)  
 Aims to provide a collection of useful command line tools for Android developers.
 
 ## Features
