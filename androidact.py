@@ -1,6 +1,8 @@
 #!/usr/bin/env python3.6
 
 import argparse
+import os
+import re
 
 def main():
     parser = argparse.ArgumentParser(description='Android CLI Tools')
@@ -10,14 +12,22 @@ def main():
     parser_generate_drawables = subparsers.add_parser('generate-drawables', help='Generate missing bitmap drawables')
     parser_generate_drawables.set_defaults(func=generate_drawables)
     parser_generate_drawables.add_argument('path', help='Path to the project root', nargs='?', default='.')
+
+    parser_prefix_resources = subparsers.add_parser('prefix-resources', help='Prefix *dpi folders with drawable-')
+    parser_prefix_resources.set_defaults(func=prefix_resources)
+    parser_prefix_resources.add_argument('path', help='Directory to prefix *dpi directories in', nargs='?', default='.')
     
     #parser_rename_drawables = subparsers.add_parser('rename-drawables', help='Rename invalid drawables')
 
     args = parser.parse_args()
     args.func(args)
 
+def prefix_resources(args):
+    dirs = [file for file in os.listdir(args.path) if re.match(r'(x*[hml]dpi|nodpi)', file)]
+    for file in dirs:
+        os.rename(file, '{}{}'.format('drawable-', file))
+
 def generate_drawables(args):
-    import os
     from PIL import Image
 
     root_dir = args.path
