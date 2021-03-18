@@ -11,4 +11,4 @@ setup(name='androidact', version='0.1',
                 'act = androidact:main'
             ]
         },
-        install_requires=['Pillow==6.2.0'])
+        install_requires=['Pillow==8.1.1'])
